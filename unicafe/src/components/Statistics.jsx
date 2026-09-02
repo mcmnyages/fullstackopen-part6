@@ -1,10 +1,12 @@
+import { useGood,useNeutral,useBad } from "../store"
+
 const Statistics = () => {
-  const good = 0
-  const neutral = 0
-  const bad = 0
-  const all = 0
-  const average = 0
-  const positive = 0
+  const good = useGood()
+  const neutral = useNeutral()
+  const bad = useBad()
+  const all = good+neutral+bad
+  const average = ((good-bad)/all) || 0
+  const positive = (good/all)*100 || 0
   
   return (
     <div>
