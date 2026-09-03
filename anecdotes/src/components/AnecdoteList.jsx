@@ -3,11 +3,11 @@ import { useNotificationActions } from "../notificationStore"
 
 const AnecdoteList = () => {
     const anecdotes = useAnecdotes()
-    const { vote } = useAnecdotesActions()
+    const { vote, removeAnecdote } = useAnecdotesActions()
     const { setNotification } = useNotificationActions()
-    const sortedAnecdotes = [...anecdotes].sort((a,b)=>b.votes-a.votes)
-    const handleVote =(id)=>{
-        const anecdote = sortedAnecdotes.find(content=>content.id===id)
+    const sortedAnecdotes = [...anecdotes].sort((a, b) => b.votes - a.votes)
+    const handleVote = (id) => {
+        const anecdote = sortedAnecdotes.find(content => content.id === id)
         vote(id)
         setNotification(`you voted '${anecdote.content}'`)
     }
@@ -18,7 +18,12 @@ const AnecdoteList = () => {
                     <div>{anecdote.content}</div>
                     <div>
                         has {anecdote.votes}
-                        <button onClick={()=>handleVote(anecdote.id)}>vote</button>
+                        <button onClick={() => handleVote(anecdote.id)}>vote</button>
+                        {anecdote.votes === 0 && (
+                            <button onClick={() => removeAnecdote(anecdote.id)}>
+                                delete
+                            </button>
+                        )}
                     </div>
                 </div>
             ))}

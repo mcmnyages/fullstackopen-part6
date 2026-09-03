@@ -34,13 +34,27 @@ const update = async (id, anecdote) => {
     },
     body: JSON.stringify(anecdote)
   })
-
   if (!response.ok) {
     throw new Error('Failed to update anecdote')
   }
-
   return await response.json()
 }
 
+const remove = async (id) => {
+  const response = await fetch(`${baseUrl}/${id}`, {
+    method: 'DELETE'
+  })
 
-export default { getAll, createNew, update }
+  if (!response.ok) {
+    throw new Error('Failed to delete anecdote')
+  }
+}
+
+
+
+export default { 
+  getAll, 
+  createNew, 
+  update,
+  remove
+ }
