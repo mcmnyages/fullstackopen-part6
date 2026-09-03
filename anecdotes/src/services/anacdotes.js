@@ -15,7 +15,7 @@ const createNew = async (content) => {
     const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({content:content, vote:0 }),
+        body: JSON.stringify({content:content, votes:0 }),
     }
 
     const response = await fetch(baseUrl,options)
