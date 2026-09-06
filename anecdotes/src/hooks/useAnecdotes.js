@@ -10,7 +10,7 @@ const useAnecdotes = () => {
     retry: 1,
   })
 
-  const create = useMutation({
+  const newAnecdote = useMutation({
     mutationFn: anecdoteService.createNew,
     onSuccess: (newAnecdotes) => {
       const anecdotes = queryClient.getQueryData(['anecdotes'])
@@ -21,7 +21,7 @@ const useAnecdotes = () => {
     anecdotes:result.data,
     isLoading:result.isLoading,
     isError:result.isError,
-    create
+    addAnecdote:(anecdote)=>newAnecdote.mutate({content:anecdote,votes:0})
   }
 }
 
