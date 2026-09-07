@@ -5,6 +5,9 @@ const AnecdoteForm = () => {
   const onCreate = (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
+    if(content.length<5){
+      alert('Should have 5 characters or more')
+    }
     newAnecdote(content)
     event.target.reset()
   }

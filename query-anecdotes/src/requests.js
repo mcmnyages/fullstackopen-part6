@@ -9,7 +9,6 @@ export const getAnecdotes = async () => {
 }
 
 export const createAnecdote = async (content) => {
-   console.log('From Create request',content)
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
