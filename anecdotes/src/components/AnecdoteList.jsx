@@ -1,10 +1,8 @@
-import { useAnecdotesActions } from "../store"
 import { useNotificationActions } from "../notificationStore"
 import useAnecdotes from '../hooks/useAnecdotes'
 
 const AnecdoteList = () => {
-    const { anecdotes, isLoading} = useAnecdotes()
-    const { vote, removeAnecdote } = useAnecdotesActions()
+    const { anecdotes, isLoading,addVote:vote} = useAnecdotes()
     const { setNotification } = useNotificationActions()
     if (isLoading) {
         return <div>Loading anecdotes...</div>
@@ -14,7 +12,7 @@ const AnecdoteList = () => {
     )
     const handleVote = (id) => {
         const anecdote = sortedAnecdotes.find(content => content.id === id)
-        vote(id)
+        vote(anecdote)
         setNotification(`you voted '${anecdote.content}'`)
     }
     return (
@@ -29,7 +27,7 @@ const AnecdoteList = () => {
                                 vote
                             </button>
                             {anecdote.votes === 0 && (
-                                <button onClick={() => removeAnecdote(anecdote.id)}>
+                                <button onClick={() => (anecdote.id)}>
                                     delete
                                 </button>
                             )}
