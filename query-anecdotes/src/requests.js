@@ -8,13 +8,14 @@ export const getAnecdotes = async () => {
  return await response.json()
 }
 
-export const createAnecdote = async (newAnecdote) => {
+export const createAnecdote = async (content) => {
+   console.log('From Create request',content)
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(newAnecdote)
+    body: JSON.stringify({content:content})
   }
- 
+
   const response = await fetch(baseUrl, options)
  
   if (!response.ok) {
