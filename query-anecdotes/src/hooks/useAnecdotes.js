@@ -15,7 +15,7 @@ const useAnecdotes = () => {
     onSuccess: (newAnecdote) => {
       const anecdotes = queryClient.getQueryData(['anecdotes'])
       queryClient.setQueryData(['anecdotes'], anecdotes.concat(newAnecdote))
-      notify('Added an anecdote')
+      notify(`${newAnecdote.content} created`)
     }
   })
 
