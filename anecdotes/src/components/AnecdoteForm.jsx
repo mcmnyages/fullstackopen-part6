@@ -1,15 +1,11 @@
-import useAnecdotes from "../hooks/useAnecdotes"
+import { useAnecdotesActions } from "../store"
 
 const AnecdoteForm = () => {
-    const { addAnecdote:add } = useAnecdotes()
+    const { add } = useAnecdotesActions()
 
     const addAnecdote = async(e) => {
         e.preventDefault()
         const content = e.target.anecdote.value
-        if(content.length<5){
-            alert('Content must be more than 5 characters')
-            return
-        }
         add(content)
         e.target.reset()
     }

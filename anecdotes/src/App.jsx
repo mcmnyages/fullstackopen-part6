@@ -1,14 +1,16 @@
 import AnecdoteList from "./components/AnecdoteList"
 import AnecdoteForm from "./components/AnecdoteForm"
 import Filter from "./components/Filter"
+import anecdotesService from './services/anecdotes'
 import Notification from "./components/Notification"
-import useAnecdotes from "./hooks/useAnecdotes"
+import { useAnecdotesActions } from './store'
+import { useEffect } from "react"
 
 const App = () => {
-  const { isError } = useAnecdotes()
-  if (isError) {
-    return <div>anecdote service not available due to problems in server</div>
-  }
+  const { initialize } = useAnecdotesActions()
+  useEffect(() => {
+    anecdotesService.getAll().then(anecdotes => initialize(anecdotes))
+  }, [initialize])
 
   return (
     <div>
