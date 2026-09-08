@@ -32,18 +32,19 @@ const useAnecdotes = () => {
     isError: response.isError,
     newAnecdote: (anecdote) => {
       if (anecdote.length < 5) {
-        return notify('too short anecdote, must have length 5 or more')
+        notify('too short anecdote, must have length 5 or more')
+        return false
       }
-      addAnecdote.mutate(anecdote)
+     return addAnecdote.mutateAsync(anecdote)
     },
     addAnecdoteSuccess: addAnecdote.isSuccess,
     addVote: (anecdote) => {
-      voteMutation.mutate({
+      voteMutation.mutateAsync({
         ...anecdote, votes: anecdote.votes + 1
       })
       notify(`anecdote '${anecdote.content}' voted`)
     },
-    addVoteSuccess:voteMutation.isSuccess
+    addVoteSuccess: voteMutation.isSuccess
   }
 }
 

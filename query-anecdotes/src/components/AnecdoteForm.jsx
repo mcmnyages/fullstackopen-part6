@@ -1,12 +1,13 @@
 import useAnecdotes from "../hooks/useAnecdotes"
 
 const AnecdoteForm = () => {
-  const { newAnecdote,addAnecdoteSuccess } = useAnecdotes()
-  const onCreate = (event) => {
+  const { newAnecdote} = useAnecdotes()
+  const onCreate = async(event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
-    newAnecdote(content)
-    if(addAnecdoteSuccess){
+    const result= await newAnecdote(content)
+    console.log('Results',result)
+    if(result){
     event.target.reset()
     }
   }
